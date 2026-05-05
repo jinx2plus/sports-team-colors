@@ -34,7 +34,7 @@ Each league has its own JSON file in the `data/` directory. Teams now feature a 
 ### NBA
 | Team | Logo | Primary | Secondary | Tertiary | Quaternary |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Phila. 76ers** | <img src="https://a.espncdn.com/i/teamlogos/nba/500/phi.png" width="40"> | ![#006BB6](https://placehold.co/15x15/006BB6/006BB6.png) #006BB6 | ![#ED174C](https://placehold.co/15x15/ED174C/ED174C.png) #ED174C | ![#002B5C](https://placehold.co/15x15/002B5C/002B5C.png) #002B5C | ![#C4CED4](https://placehold.co/15x15/C4CED4/C4CED4.png) #C4CED4 |
+| **Phila. 76ers** | <img src="https://a.espncdn.com/i/teamlogos/nba/500/phi.png" width="40"> | ![#006BB6](https://placehold.co/15x15/006BB6/006BB6.png) #006BB6 | ![#ED174C](https://placehold.co/15x15/ED174C/ED174C.png) #ED174C | ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) #FFFFFF | ![#C4CED4](https://placehold.co/15x15/C4CED4/C4CED4.png) #C4CED4 |
 | **Houston Rockets** | <img src="https://a.espncdn.com/i/teamlogos/nba/500/hou.png" width="40"> | ![#CE1141](https://placehold.co/15x15/CE1141/CE1141.png) #CE1141 | ![#000000](https://placehold.co/15x15/000000/000000.png) #000000 | ![#C4CED4](https://placehold.co/15x15/C4CED4/C4CED4.png) #C4CED4 | ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) #FFFFFF |
 
 ### EPL
