@@ -1,0 +1,22 @@
+[
+    {"id": "epl-arsenal", "num_id": 201, "name": "Arsenal", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png", "colors": {"primary": "#EF0107", "secondary": "#FFFFFF"}},
+    {"id": "epl-astonvilla", "num_id": 202, "name": "Aston Villa", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png", "colors": {"primary": "#670E36", "secondary": "#95BFE5"}},
+    {"id": "epl-bournemouth", "num_id": 203, "name": "Bournemouth", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png", "colors": {"primary": "#D5171C", "secondary": "#000000"}},
+    {"id": "epl-brentford", "num_id": 204, "name": "Brentford", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/130.png", "colors": {"primary": "#D20000", "secondary": "#FFFFFF"}},
+    {"id": "epl-brighton", "num_id": 205, "name": "Brighton & Hove Albion", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png", "colors": {"primary": "#005DAA", "secondary": "#FFFFFF"}},
+    {"id": "epl-chelsea", "num_id": 206, "name": "Chelsea", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png", "colors": {"primary": "#034694", "secondary": "#FFFFFF"}},
+    {"id": "epl-crystalpalace", "num_id": 207, "name": "Crystal Palace", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png", "colors": {"primary": "#1B458F", "secondary": "#C4122E"}},
+    {"id": "epl-everton", "num_id": 208, "name": "Everton", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png", "colors": {"primary": "#003399", "secondary": "#FFFFFF"}},
+    {"id": "epl-fulham", "num_id": 209, "name": "Fulham", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png", "colors": {"primary": "#FFFFFF", "secondary": "#000000"}},
+    {"id": "epl-ipswich", "num_id": 210, "name": "Ipswich Town", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/374.png", "colors": {"primary": "#3A64A3", "secondary": "#FFFFFF"}},
+    {"id": "epl-leicester", "num_id": 211, "name": "Leicester City", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/375.png", "colors": {"primary": "#003090", "secondary": "#FDBE11"}},
+    {"id": "epl-liverpool", "num_id": 212, "name": "Liverpool", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png", "colors": {"primary": "#C8102E", "secondary": "#FFFFFF"}},
+    {"id": "epl-mancity", "num_id": 213, "name": "Manchester City", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png", "colors": {"primary": "#6CABDD", "secondary": "#1C2C5B"}},
+    {"id": "epl-manutd", "num_id": 214, "name": "Manchester United", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png", "colors": {"primary": "#DA020E", "secondary": "#FFFFFF"}},
+    {"id": "epl-newcastle", "num_id": 215, "name": "Newcastle United", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png", "colors": {"primary": "#000000", "secondary": "#FFFFFF"}},
+    {"id": "epl-nottingham", "num_id": 216, "name": "Nottingham Forest", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/393.png", "colors": {"primary": "#DD0000", "secondary": "#FFFFFF"}},
+    {"id": "epl-southampton", "num_id": 217, "name": "Southampton", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/376.png", "colors": {"primary": "#D71920", "secondary": "#FFFFFF"}},
+    {"id": "epl-tottenham", "num_id": 218, "name": "Tottenham Hotspur", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png", "colors": {"primary": "#132257", "secondary": "#FFFFFF"}},
+    {"id": "epl-westham", "num_id": 219, "name": "West Ham United", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/371.png", "colors": {"primary": "#7A263A", "secondary": "#1BB1E7"}},
+    {"id": "epl-wolves", "num_id": 220, "name": "Wolverhampton Wanderers", "logo_url": "https://a.espncdn.com/i/teamlogos/soccer/500/380.png", "colors": {"primary": "#FDB913", "secondary": "#231F20"}}
+]
