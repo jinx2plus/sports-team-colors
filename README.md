@@ -24,7 +24,7 @@ Each league has its own JSON file in the `data/` directory. Teams now feature a 
 ## Visual Reference (Sample)
 
 ### Color Palette Applications
-![Donut Charts](Gemini_Generated_Image_ywsklmywsklmywsk.png)
+![Donut Charts](Gemini_Generated_Image_9twi0c9twi0c9twi.png)
 ![Stacked Bars](readme_actual_team_color_chart_comparison_v3_distinct.png)
 
 ## Comprehensive Team List
