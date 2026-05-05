@@ -1,0 +1,113 @@
+﻿league,id,num_id,name,logo_url,primary,secondary,tertiary,quaternary
+MLB,mlb-diamondbacks,101,Arizona Diamondbacks,https://a.espncdn.com/i/teamlogos/mlb/500/ari.png,#A71930,#E3D4AD,#000000,#3FC2CC
+MLB,mlb-braves,102,Atlanta Braves,https://a.espncdn.com/i/teamlogos/mlb/500/atl.png,#13274F,#CE1141,#EAAA00,#FFFFFF
+MLB,mlb-orioles,103,Baltimore Orioles,https://a.espncdn.com/i/teamlogos/mlb/500/bal.png,#DF4601,#000000,#FFFFFF,#A1AAAD
+MLB,mlb-redsox,104,Boston Red Sox,https://a.espncdn.com/i/teamlogos/mlb/500/bos.png,#BD3039,#0D2B56,#FFFFFF,#A1AAAD
+MLB,mlb-cubs,105,Chicago Cubs,https://a.espncdn.com/i/teamlogos/mlb/500/chc.png,#0E3386,#CC3433,#FFFFFF,#A1AAAD
+MLB,mlb-whitesox,106,Chicago White Sox,https://a.espncdn.com/i/teamlogos/mlb/500/cws.png,#27251F,#C4CED4,#FFFFFF,#000000
+MLB,mlb-reds,107,Cincinnati Reds,https://a.espncdn.com/i/teamlogos/mlb/500/cin.png,#C6011F,#000000,#FFFFFF,#A1AAAD
+MLB,mlb-guardians,108,Cleveland Guardians,https://a.espncdn.com/i/teamlogos/mlb/500/cle.png,#00385D,#E50022,#FFFFFF,#A1AAAD
+MLB,mlb-rockies,109,Colorado Rockies,https://a.espncdn.com/i/teamlogos/mlb/500/col.png,#33006F,#C4CED4,#000000,#FFFFFF
+MLB,mlb-tigers,110,Detroit Tigers,https://a.espncdn.com/i/teamlogos/mlb/500/det.png,#0C2340,#FA4616,#FFFFFF,#A1AAAD
+MLB,mlb-astros,111,Houston Astros,https://a.espncdn.com/i/teamlogos/mlb/500/hou.png,#002D62,#EB6E1F,#FFFFFF,#A1AAAD
+MLB,mlb-royals,112,Kansas City Royals,https://a.espncdn.com/i/teamlogos/mlb/500/kc.png,#004687,#BD9B60,#FFFFFF,#000000
+MLB,mlb-angels,113,Los Angeles Angels,https://a.espncdn.com/i/teamlogos/mlb/500/laa.png,#BA0021,#003263,#C4CED4,#FFFFFF
+MLB,mlb-dodgers,114,Los Angeles Dodgers,https://a.espncdn.com/i/teamlogos/mlb/500/lad.png,#005A9C,#FFFFFF,#EF3E42,#A1AAAD
+MLB,mlb-marlins,115,Miami Marlins,https://a.espncdn.com/i/teamlogos/mlb/500/mia.png,#00A3E0,#EF3340,#ACACAC,#000000
+MLB,mlb-brewers,116,Milwaukee Brewers,https://a.espncdn.com/i/teamlogos/mlb/500/mil.png,#12284B,#FFC72C,#FFFFFF,#A1AAAD
+MLB,mlb-twins,117,Minnesota Twins,https://a.espncdn.com/i/teamlogos/mlb/500/min.png,#002B5C,#D31145,#B9975B,#FFFFFF
+MLB,mlb-mets,118,New York Mets,https://a.espncdn.com/i/teamlogos/mlb/500/nym.png,#002D72,#FF5910,#FFFFFF,#A1AAAD
+MLB,mlb-yankees,119,New York Yankees,https://a.espncdn.com/i/teamlogos/mlb/500/nyy.png,#FFFFFF,#003087,#E1E1E1,#000000
+MLB,mlb-athletics,120,Oakland Athletics,https://a.espncdn.com/i/teamlogos/mlb/500/oak.png,#003831,#EFB21E,#FFFFFF,#A1AAAD
+MLB,mlb-phillies,121,Philadelphia Phillies,https://a.espncdn.com/i/teamlogos/mlb/500/phi.png,#E81828,#002D72,#FFFFFF,#A1AAAD
+MLB,mlb-pirates,122,Pittsburgh Pirates,https://a.espncdn.com/i/teamlogos/mlb/500/pit.png,#27251F,#FDB927,#FFFFFF,#A1AAAD
+MLB,mlb-padres,123,San Diego Padres,https://a.espncdn.com/i/teamlogos/mlb/500/sd.png,#2F241D,#FFC72C,#FFFFFF,#A1AAAD
+MLB,mlb-giants,124,San Francisco Giants,https://a.espncdn.com/i/teamlogos/mlb/500/sf.png,#FD5A1E,#27251F,#EFD19F,#FFFFFF
+MLB,mlb-mariners,125,Seattle Mariners,https://a.espncdn.com/i/teamlogos/mlb/500/sea.png,#0C2C56,#005C5C,#C4CED4,#FFFFFF
+MLB,mlb-cardinals,126,St. Louis Cardinals,https://a.espncdn.com/i/teamlogos/mlb/500/stl.png,#C41E3A,#0A2240,#FEDB00,#FFFFFF
+MLB,mlb-rays,127,Tampa Bay Rays,https://a.espncdn.com/i/teamlogos/mlb/500/tb.png,#092C5C,#8FBCE6,#F5D130,#FFFFFF
+MLB,mlb-rangers,128,Texas Rangers,https://a.espncdn.com/i/teamlogos/mlb/500/tex.png,#003278,#C0111F,#FFFFFF,#A1AAAD
+MLB,mlb-bluejays,129,Toronto Blue Jays,https://a.espncdn.com/i/teamlogos/mlb/500/tor.png,#134A8E,#1D2D5C,#E8291C,#FFFFFF
+MLB,mlb-nationals,130,Washington Nationals,https://a.espncdn.com/i/teamlogos/mlb/500/was.png,#AB0003,#14225A,#FFFFFF,#AB0003
+NBA,nba-hawks,301,Atlanta Hawks,https://a.espncdn.com/i/teamlogos/nba/500/atl.png,#E03A3E,#C1D32F,#26282A,#FFFFFF
+NBA,nba-celtics,302,Boston Celtics,https://a.espncdn.com/i/teamlogos/nba/500/bos.png,#007A33,#BA9653,#000000,#FFFFFF
+NBA,nba-nets,303,Brooklyn Nets,https://a.espncdn.com/i/teamlogos/nba/500/bkn.png,#000000,#FFFFFF,#707271,#222222
+NBA,nba-hornets,304,Charlotte Hornets,https://a.espncdn.com/i/teamlogos/nba/500/cha.png,#1D1160,#00788C,#A1A1A4,#FFFFFF
+NBA,nba-bulls,305,Chicago Bulls,https://a.espncdn.com/i/teamlogos/nba/500/chi.png,#CE1141,#000000,#FFFFFF,#808080
+NBA,nba-cavaliers,306,Cleveland Cavaliers,https://a.espncdn.com/i/teamlogos/nba/500/cle.png,#860038,#041E42,#FFB81C,#000000
+NBA,nba-mavericks,307,Dallas Mavericks,https://a.espncdn.com/i/teamlogos/nba/500/dal.png,#00538C,#002B5E,#B8C4CA,#000000
+NBA,nba-nuggets,308,Denver Nuggets,https://a.espncdn.com/i/teamlogos/nba/500/den.png,#0E2240,#FEC524,#8B2131,#1D428A
+NBA,nba-pistons,309,Detroit Pistons,https://a.espncdn.com/i/teamlogos/nba/500/det.png,#1D428A,#C8102E,#BEC0C2,#FFFFFF
+NBA,nba-warriors,310,Golden State Warriors,https://a.espncdn.com/i/teamlogos/nba/500/gsw.png,#1D428A,#FFC72C,#FFFFFF,#26282A
+NBA,nba-rockets,311,Houston Rockets,https://a.espncdn.com/i/teamlogos/nba/500/hou.png,#CE1141,#000000,#C4CED4,#FFFFFF
+NBA,nba-pacers,312,Indiana Pacers,https://a.espncdn.com/i/teamlogos/nba/500/ind.png,#002D62,#FDB927,#BEC0C2,#FFFFFF
+NBA,nba-clippers,313,LA Clippers,https://a.espncdn.com/i/teamlogos/nba/500/lac.png,#C8102E,#1D428A,#BEC0C2,#FFFFFF
+NBA,nba-lakers,314,Los Angeles Lakers,https://a.espncdn.com/i/teamlogos/nba/500/lal.png,#552583,#FDB927,#000000,#FFFFFF
+NBA,nba-grizzlies,315,Memphis Grizzlies,https://a.espncdn.com/i/teamlogos/nba/500/mem.png,#5D76A9,#12173F,#85714D,#F5B112
+NBA,nba-heat,316,Miami Heat,https://a.espncdn.com/i/teamlogos/nba/500/mia.png,#98002E,#F9A01B,#000000,#FFFFFF
+NBA,nba-bucks,317,Milwaukee Bucks,https://a.espncdn.com/i/teamlogos/nba/500/mil.png,#00471B,#EEE1C6,#0077C0,#000000
+NBA,nba-timberwolves,318,Minnesota Timberwolves,https://a.espncdn.com/i/teamlogos/nba/500/min.png,#0C2340,#236192,#9EA2A2,#78BE20
+NBA,nba-pelicans,319,New Orleans Pelicans,https://a.espncdn.com/i/teamlogos/nba/500/nop.png,#0C2340,#C8102E,#85714D,#FFFFFF
+NBA,nba-knicks,320,New York Knicks,https://a.espncdn.com/i/teamlogos/nba/500/nyk.png,#006BB6,#F58426,#BEC0C2,#FFFFFF
+NBA,nba-thunder,321,Oklahoma City Thunder,https://a.espncdn.com/i/teamlogos/nba/500/okc.png,#007AC1,#EF3B24,#002D62,#FDBB30
+NBA,nba-magic,322,Orlando Magic,https://a.espncdn.com/i/teamlogos/nba/500/orl.png,#0077C0,#C4CED4,#000000,#FFFFFF
+NBA,nba-76ers,323,Philadelphia 76ers,https://a.espncdn.com/i/teamlogos/nba/500/phi.png,#006BB6,#ED174C,#FFFFFF,#C4CED4
+NBA,nba-suns,324,Phoenix Suns,https://a.espncdn.com/i/teamlogos/nba/500/phx.png,#1D1160,#E56020,#000000,#63727A
+NBA,nba-trailblazers,325,Portland Trail Blazers,https://a.espncdn.com/i/teamlogos/nba/500/por.png,#E03A3E,#000000,#FFFFFF,#A1A1A4
+NBA,nba-kings,326,Sacramento Kings,https://a.espncdn.com/i/teamlogos/nba/500/sac.png,#5A2D81,#63727A,#000000,#FFFFFF
+NBA,nba-spurs,327,San Antonio Spurs,https://a.espncdn.com/i/teamlogos/nba/500/sas.png,#C4CED4,#000000,#FFFFFF,#808080
+NBA,nba-raptors,328,Toronto Raptors,https://a.espncdn.com/i/teamlogos/nba/500/tor.png,#CE1141,#000000,#A1A1A4,#B4975A
+NBA,nba-jazz,329,Utah Jazz,https://a.espncdn.com/i/teamlogos/nba/500/utah.png,#002B5C,#00471B,#F9A01B,#FFFFFF
+NBA,nba-wizards,330,Washington Wizards,https://a.espncdn.com/i/teamlogos/nba/500/was.png,#002B5C,#E31837,#C4CED4,#FFFFFF
+NFL,nfl-cardinals,401,Arizona Cardinals,https://a.espncdn.com/i/teamlogos/nfl/500/ari.png,#97233F,#000000,#FFB612,#FFFFFF
+NFL,nfl-falcons,402,Atlanta Falcons,https://a.espncdn.com/i/teamlogos/nfl/500/atl.png,#A71930,#000000,#A5ACAF,#FFFFFF
+NFL,nfl-ravens,403,Baltimore Ravens,https://a.espncdn.com/i/teamlogos/nfl/500/bal.png,#241773,#000000,#9E7C0C,#FFFFFF
+NFL,nfl-bills,404,Buffalo Bills,https://a.espncdn.com/i/teamlogos/nfl/500/buf.png,#00338D,#C60C30,#FFFFFF,#A5ACAF
+NFL,nfl-panthers,405,Carolina Panthers,https://a.espncdn.com/i/teamlogos/nfl/500/car.png,#0085CA,#101820,#BFC0BF,#FFFFFF
+NFL,nfl-bears,406,Chicago Bears,https://a.espncdn.com/i/teamlogos/nfl/500/chi.png,#0B162A,#C83803,#FFFFFF,#A5ACAF
+NFL,nfl-bengals,407,Cincinnati Bengals,https://a.espncdn.com/i/teamlogos/nfl/500/cin.png,#FB4F14,#000000,#FFFFFF,#A5ACAF
+NFL,nfl-browns,408,Cleveland Browns,https://a.espncdn.com/i/teamlogos/nfl/500/cle.png,#311D00,#FF3C00,#FFFFFF,#A5ACAF
+NFL,nfl-cowboys,409,Dallas Cowboys,https://a.espncdn.com/i/teamlogos/nfl/500/dal.png,#003594,#869397,#041E42,#FFFFFF
+NFL,nfl-broncos,410,Denver Broncos,https://a.espncdn.com/i/teamlogos/nfl/500/den.png,#FB4F14,#002244,#FFFFFF,#A5ACAF
+NFL,nfl-lions,411,Detroit Lions,https://a.espncdn.com/i/teamlogos/nfl/500/det.png,#0076B6,#B0B7BC,#000000,#FFFFFF
+NFL,nfl-packers,412,Green Bay Packers,https://a.espncdn.com/i/teamlogos/nfl/500/gb.png,#203731,#FFB612,#FFFFFF,#A5ACAF
+NFL,nfl-texans,413,Houston Texans,https://a.espncdn.com/i/teamlogos/nfl/500/hou.png,#03202F,#A71930,#FFFFFF,#A5ACAF
+NFL,nfl-colts,414,Indianapolis Colts,https://a.espncdn.com/i/teamlogos/nfl/500/ind.png,#002C5F,#A2AAAD,#FFFFFF,#000000
+NFL,nfl-jaguars,415,Jacksonville Jaguars,https://a.espncdn.com/i/teamlogos/nfl/500/jax.png,#006778,#D7A22A,#9F792C,#101820
+NFL,nfl-chiefs,416,Kansas City Chiefs,https://a.espncdn.com/i/teamlogos/nfl/500/kc.png,#E31837,#FFB81C,#FFFFFF,#A5ACAF
+NFL,nfl-raiders,417,Las Vegas Raiders,https://a.espncdn.com/i/teamlogos/nfl/500/lv.png,#000000,#A5ACAF,#FFFFFF,#808080
+NFL,nfl-chargers,418,LA Chargers,https://a.espncdn.com/i/teamlogos/nfl/500/lac.png,#0080C6,#FFC20E,#FFFFFF,#002244
+NFL,nfl-rams,419,LA Rams,https://a.espncdn.com/i/teamlogos/nfl/500/lar.png,#003594,#FFA300,#FFD100,#FFFFFF
+NFL,nfl-dolphins,420,Miami Dolphins,https://a.espncdn.com/i/teamlogos/nfl/500/mia.png,#008E97,#FC4C02,#005778,#FFFFFF
+NFL,nfl-vikings,421,Minnesota Vikings,https://a.espncdn.com/i/teamlogos/nfl/500/min.png,#4F2683,#FFC62F,#FFFFFF,#000000
+NFL,nfl-patriots,422,New England Patriots,https://a.espncdn.com/i/teamlogos/nfl/500/ne.png,#002244,#C60C30,#B0B7BC,#FFFFFF
+NFL,nfl-saints,423,New Orleans Saints,https://a.espncdn.com/i/teamlogos/nfl/500/no.png,#D3BC8D,#101820,#FFFFFF,#000000
+NFL,nfl-giants,424,New York Giants,https://a.espncdn.com/i/teamlogos/nfl/500/nyg.png,#0B2265,#A71930,#A5ACAF,#FFFFFF
+NFL,nfl-jets,425,New York Jets,https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png,#125740,#000000,#FFFFFF,#A5ACAF
+NFL,nfl-eagles,426,Philadelphia Eagles,https://a.espncdn.com/i/teamlogos/nfl/500/phi.png,#004C54,#A5ACAF,#010101,#ACC0C6
+NFL,nfl-steelers,427,Pittsburgh Steelers,https://a.espncdn.com/i/teamlogos/nfl/500/pit.png,#FFB612,#101820,#003087,#C60C30
+NFL,nfl-49ers,428,San Francisco 49ers,https://a.espncdn.com/i/teamlogos/nfl/500/sf.png,#AA0000,#B3995D,#000000,#FFFFFF
+NFL,nfl-seahawks,429,Seattle Seahawks,https://a.espncdn.com/i/teamlogos/nfl/500/sea.png,#002244,#69BE28,#A5ACAF,#FFFFFF
+NFL,nfl-buccaneers,430,Tampa Bay Buccaneers,https://a.espncdn.com/i/teamlogos/nfl/500/tb.png,#D50A0A,#34302B,#B1BABF,#FF7900
+NFL,nfl-titans,431,Tennessee Titans,https://a.espncdn.com/i/teamlogos/nfl/500/ten.png,#0C2340,#4B92DB,#C8102E,#A5ACAF
+NFL,nfl-commanders,432,Washington Commanders,https://a.espncdn.com/i/teamlogos/nfl/500/was.png,#5A1414,#FFB612,#FFFFFF,#000000
+EPL,epl-arsenal,201,Arsenal,https://a.espncdn.com/i/teamlogos/soccer/500/359.png,#EF0107,#063672,#FFFFFF,#9C824A
+EPL,epl-astonvilla,202,Aston Villa,https://a.espncdn.com/i/teamlogos/soccer/500/362.png,#95BFE5,#670E36,#FEE505,#FFFFFF
+EPL,epl-bournemouth,203,Bournemouth,https://a.espncdn.com/i/teamlogos/soccer/500/349.png,#DA291C,#000000,#FFFFFF,#A1AAAD
+EPL,epl-brentford,204,Brentford,https://a.espncdn.com/i/teamlogos/soccer/500/130.png,#E30613,#FFFFFF,#F6EB14,#000000
+EPL,epl-brighton,205,Brighton & Hove Albion,https://a.espncdn.com/i/teamlogos/soccer/500/331.png,#0057B8,#FFFFFF,#FFCD00,#000000
+EPL,epl-chelsea,206,Chelsea,https://a.espncdn.com/i/teamlogos/soccer/500/363.png,#034694,#DBA111,#FFFFFF,#EE242C
+EPL,epl-crystalpalace,207,Crystal Palace,https://a.espncdn.com/i/teamlogos/soccer/500/384.png,#1B458F,#C4122E,#A7A5A6,#FFFFFF
+EPL,epl-everton,208,Everton,https://a.espncdn.com/i/teamlogos/soccer/500/368.png,#003399,#FFFFFF,#A1AAAD,#000000
+EPL,epl-fulham,209,Fulham,https://a.espncdn.com/i/teamlogos/soccer/500/370.png,#FFFFFF,#000000,#CC0000,#A1AAAD
+EPL,epl-ipswich,210,Ipswich Town,https://a.espncdn.com/i/teamlogos/soccer/500/374.png,#00529B,#FFFFFF,#ED1C24,#000000
+EPL,epl-leicester,211,Leicester City,https://a.espncdn.com/i/teamlogos/soccer/500/375.png,#003090,#FDBE11,#FFFFFF,#000000
+EPL,epl-liverpool,212,Liverpool,https://a.espncdn.com/i/teamlogos/soccer/500/364.png,#C8102E,#00B2A9,#F6EB61,#FFFFFF
+EPL,epl-mancity,213,Manchester City,https://a.espncdn.com/i/teamlogos/soccer/500/382.png,#6CABDD,#1C2C5B,#FFFFFF,#A1AAAD
+EPL,epl-manutd,214,Manchester United,https://a.espncdn.com/i/teamlogos/soccer/500/360.png,#DA020E,#FFE500,#000000,#FFFFFF
+EPL,epl-newcastle,215,Newcastle United,https://a.espncdn.com/i/teamlogos/soccer/500/361.png,#241F20,#FFFFFF,#F1BE48,#A1AAAD
+EPL,epl-nottingham,216,Nottingham Forest,https://a.espncdn.com/i/teamlogos/soccer/500/393.png,#DD0000,#FFFFFF,#A1AAAD,#000000
+EPL,epl-southampton,217,Southampton,https://a.espncdn.com/i/teamlogos/soccer/500/376.png,#D71920,#130C0E,#FFFFFF,#A1AAAD
+EPL,epl-tottenham,218,Tottenham Hotspur,https://a.espncdn.com/i/teamlogos/soccer/500/367.png,#132257,#FFFFFF,#A1AAAD,#000000
+EPL,epl-westham,219,West Ham United,https://a.espncdn.com/i/teamlogos/soccer/500/371.png,#7A263A,#1BB1E7,#F3D459,#FFFFFF
+EPL,epl-wolves,220,Wolverhampton Wanderers,https://a.espncdn.com/i/teamlogos/soccer/500/380.png,#FDB913,#231F20,#FFFFFF,#A1AAAD
