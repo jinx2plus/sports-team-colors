@@ -1,58 +1,61 @@
 import json
 import requests
 
+# List of all leagues in this repository
+LEAGUES = ["mlb", "nba", "nfl", "epl"]
+
+def get_team_by_id(team_id, use_github=True):
+    """
+    Find a specific team's data across all leagues.
+    team_id: e.g., 'nba-lakers', 'mlb-dodgers', 'epl-liverpool'
+    """
+    for league in LEAGUES:
+        if use_github:
+            data = load_data_from_github(league)
+        else:
+            data = load_data_locally(league)
+            
+        if data:
+            team = next((t for t in data if t['id'] == team_id), None)
+            if team:
+                return team
+    return None
+
 def load_data_locally(league):
-    """Load team data from a local JSON file."""
     try:
         with open(f'data/{league}.json', 'r') as f:
             return json.load(f)
     except FileNotFoundError:
-        print(f"Local file data/{league}.json not found.")
         return None
 
 def load_data_from_github(league):
-    """
-    Load team data directly from the GitHub repository.
-    This is useful for using the data in external projects without cloning the repo.
-    """
     user = "jinx2plus"
     repo = "sports-team-colors"
     branch = "main"
     url = f"https://raw.githubusercontent.com/{user}/{repo}/{branch}/data/{league}.json"
     
-    print(f"Fetching data from: {url}")
     try:
         response = requests.get(url)
-        response.raise_for_status() # Check for HTTP errors
+        response.raise_for_status()
         return response.json()
-    except Exception as e:
-        print(f"Error fetching data from GitHub: {e}")
+    except Exception:
         return None
 
 def main():
-    league = "nba"
+    # Example: Look up specific teams regardless of which league they are in
+    target_teams = ["nba-lakers", "mlb-yankees", "epl-liverpool", "nfl-chiefs"]
     
-    # Example 1: Loading from GitHub (Recommended for external apps)
-    print("--- Example 1: GitHub Import ---")
-    teams = load_data_from_github(league)
+    print(f"--- Searching for {len(target_teams)} teams ---")
     
-    if teams:
-        print(f"Successfully loaded {len(teams)} teams from GitHub.")
-        # Accessing a specific team (e.g., LA Lakers)
-        lakers = next((t for t in teams if t['id'] == 'nba-lakers'), None)
-        if lakers:
-            print(f"Team: {lakers['name']}")
-            print(f"Primary Color: {lakers['colors']['primary']}")
-            print(f"Logo URL: {lakers['logo_url']}")
-    
-    print("\n" + "="*40 + "\n")
-    
-    # Example 2: Loading Locally
-    print("--- Example 2: Local Import ---")
-    local_teams = load_data_locally(league)
-    if local_teams:
-        print(f"Successfully loaded {len(local_teams)} teams from local file.")
+    for tid in target_teams:
+        team = get_team_by_id(tid, use_github=True)
+        if team:
+            print(f"Found: {team['name']}")
+            print(f"  Colors: {list(team['colors'].values())}")
+            print(f"  Logo: {team['logo_url']}")
+        else:
+            print(f"Could not find team: {tid}")
 
 if __name__ == "__main__":
-    # Note: You need the 'requests' library installed: pip install requests
+    # pip install requests
     main()
