@@ -23,6 +23,9 @@ Each league has its own JSON file in the `data/` directory. Teams now feature a 
 
 ## Visual Reference (Sample)
 
+### Color Palette Preview
+![Team Palettes](palette_preview.png)
+
 ### MLB
 | Team | Logo | Primary | Secondary | Tertiary | Quaternary |
 | :--- | :---: | :---: | :---: | :---: | :---: |
