@@ -1,5 +1,5 @@
 # Sports Team Colors
-
+데이터 시각화를 할 때 색조합을 어떻게 해야할지 항상 고민이어서 이미 스포츠팀들이 막대한 예산을 쏟은 색들을 사용하는 것이 더 효율적이라는 생각하에 프로팀들의 색 조합을 그대로 가져왔습니다. 
 A data-driven project providing comprehensive color schemes (up to 4 colors per team) and high-quality logos for NBA, NFL, MLB, and EPL teams.
 
 ## Data Structure
