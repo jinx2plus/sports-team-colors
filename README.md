@@ -14,8 +14,8 @@ Each league has its own JSON file in the `data/` directory. Teams now feature a 
     "logo_url": "https://a.espncdn.com/i/teamlogos/mlb/500/lad.png",
     "colors": {
         "primary": "#005A9C",
-        "secondary": "#EF3E42",
-        "tertiary": "#FFFFFF",
+        "secondary": "#FFFFFF",
+        "tertiary": "#EF3E42",
         "quaternary": "#A1AAAD"
     }
 }
@@ -159,3 +159,25 @@ Each league has its own JSON file in the `data/` directory. Teams now feature a 
 
 ## Full Dataset
 Check the `data/` folder for the full list of 112 teams across 4 leagues.
+
+
+## Python palette API & accessibility QA
+
+The chart-aware Python API preserves the 112 source palettes and returns display-specific variants for categorical, sequential, and diverging charts. Essential chart marks can be adjusted toward 3:1 contrast against the selected light/dark background, and the audit includes approximate color-vision-deficiency warnings. **Passing automated checks does not certify full WCAG compliance.**
+
+For installation, usage, source/provenance limits, Matplotlib/Plotly examples, and semantic traffic-safety color guardrails, see [Python usage and design rules](docs/USAGE.md).
+
+```bash
+python -m pip install -e .
+python -m pip install pytest
+python -m pytest -q
+```
+
+```python
+from sports_colors import get_palette, get_team_colors
+original = get_team_colors("nba-lakers")
+palette = get_palette("nba-lakers", chart_type="categorical", n_colors=3, theme="light")
+print(original, palette.colors, palette.warnings)
+```
+
+The colors and logos are third-party brand references; their presence does not grant endorsement or licensing rights.

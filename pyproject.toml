@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sports-team-colors"
+version = "0.2.0"
+description = "Sports team inspired palettes with chart semantics and contrast audits"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.setuptools]
+packages = ["sports_colors"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+sports_colors = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
