@@ -115,3 +115,47 @@ def test_installed_package_does_not_use_unrelated_site_packages_data(tmp_path, m
             assert {x["id"] for x in found} == {f"{league}-from-wheel" for league in ("mlb", "nba", "nfl", "epl")}
     finally:
         palette_module.all_teams.cache_clear()
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+@pytest.mark.parametrize("count", [5, 9, 20])
+def test_diverging_preserves_magnitude_order_with_accessibility(theme, count):
+    """Each side must encode increasing distance from zero with ordered luminance."""
+    from sports_colors.color_math import relative_luminance
+
+    direction = 1 if theme == "dark" else -1
+    for team in all_teams():
+        p = get_palette(team["id"], chart_type="diverging", theme=theme,
+                        n_colors=count, accessibility="wcag-aa")
+        lum = [relative_luminance(c) for c in p.colors]
+        strengths = [abs(2 * i / (count-1) - 1) for i in range(count)]
+        assert all(contrast_ratio(c, p.background) >= 3.0 for c in p.colors), team["id"]
+        for i in range(count-1):
+            delta_strength = strengths[i + 1] - strengths[i]
+            delta_y = lum[i + 1] - lum[i]
+            if abs(delta_strength) < 1e-8:
+                assert abs(delta_y) < 0.005
+            else:
+                assert delta_strength * delta_y * direction > 1e-6, (team["id"], theme, count, p.colors)
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+@pytest.mark.parametrize("count", [4, 10, 20])
+def test_categorical_retains_distinct_swatches_after_contrast(theme, count):
+    from sports_colors.color_math import distance_oklab
+
+    for team in all_teams():
+        p = get_palette(team["id"], chart_type="categorical", theme=theme,
+                        n_colors=count, accessibility="wcag-aa")
+        assert len(p.colors) == len(set(p.colors)), (team["id"], theme, count)
+        assert all(contrast_ratio(c, p.background) >= 3.0 for c in p.colors), team["id"]
+        assert all(distance_oklab(a, b) >= 0.065 for i, a in enumerate(p.colors)
+                   for b in p.colors[i+1:]), team["id"]
+
+
+def test_yankees_duplicate_contrast_correction_is_replaced():
+    p = get_palette("mlb-yankees", n_colors=4, accessibility="wcag-aa")
+    assert len(set(p.colors)) == 4
+    assert any("contrast-colliding category colors" in message for message in p.warnings)
+    assert p.original_colors[0] == "#FFFFFF"
+    assert p.original_colors[2] == "#E1E1E1"
