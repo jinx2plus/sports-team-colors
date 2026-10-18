@@ -12,6 +12,7 @@ from .accessibility import audit_palette
 from .color_math import (
     best_text_color,
     contrast_ratio,
+    distance_oklab,
     ensure_contrast,
     from_oklch,
     normalize_hex,
@@ -107,6 +108,92 @@ def _sequential(sources: tuple[str, ...], count: int, *, dark: bool) -> list[str
     _, chroma, hue = to_oklch(sources[0])
     start, end = ((0.48, 0.88) if dark else (0.64, 0.25))
     return [from_oklch(start + (end - start) * i / (count - 1), chroma, hue) for i in range(count)]
+
+
+def _accessible_categorical(colors: list[str], background: str) -> tuple[list[str], int]:
+    """Fix contrast while keeping categorical swatches perceptually distinct.
+
+    WCAG correction can collapse distinct light source colors into identical
+    gray shades. Prefer a different lightness of the same hue; synthesize hues
+    only if that cannot produce a sufficiently different accessible color.
+    """
+    chosen: list[str] = []
+    replacements = 0
+    dark = relative_luminance(background) < 0.5
+    for source in colors:
+        candidate = ensure_contrast(source, background, 3.0)
+        if candidate not in chosen and all(distance_oklab(candidate, prev) >= 0.07 for prev in chosen):
+            chosen.append(candidate)
+            continue
+        l, c, h = to_oklch(source)
+        alternatives: list[str] = []
+        for delta in (-0.12, 0.12, -0.22, 0.22, -0.34, 0.34, -0.44, 0.44):
+            alternate = from_oklch(max(0.06, min(0.95, l + delta)), c, h)
+            alternatives.append(ensure_contrast(alternate, background, 3.0))
+        for step in range(1, 101):
+            hue = h + step * 2.399963229728653  # golden-angle hue offsets
+            for lightness in ((0.72, 0.82, 0.63) if dark else (0.45, 0.37, 0.53)):
+                alternate = from_oklch(lightness, max(c, 0.14), hue)
+                alternatives.append(ensure_contrast(alternate, background, 3.0))
+        match = next((value for value in alternatives
+                      if value not in chosen
+                      and all(distance_oklab(value, prev) >= 0.09 for prev in chosen)), None)
+        if match is None:
+            raise ValueError("Cannot generate distinguishable accessible categorical colors")
+        chosen.append(match)
+        replacements += 1
+    return chosen, replacements
+
+
+def _color_at_luminance(source: str, target: float, chroma_scale: float) -> str:
+    """Find a display color with measured relative luminance near target."""
+    _, chroma, hue = to_oklch(source)
+    chroma *= chroma_scale
+    lo, hi = 0.0, 1.0
+    for _ in range(26):
+        mid = (lo + hi) / 2
+        if relative_luminance(from_oklch(mid, chroma, hue)) < target:
+            lo = mid
+        else:
+            hi = mid
+    candidates = (from_oklch(lo, chroma, hue), from_oklch(hi, chroma, hue))
+    return min(candidates, key=lambda color: abs(relative_luminance(color) - target))
+
+
+def _accessible_diverging(colors: list[str], *, dark: bool, background: str) -> list[str]:
+    """Maintain magnitude order on both sides of the zero midpoint.
+
+    Contrast targeting by each swatch's original OKLCH lightness could invert
+    zero-adjacent bins. Instead set targets in measured sRGB luminance space,
+    with the neutral midpoint and both end magnitudes ordered outward.
+    """
+    if len(colors) == 1:
+        return [ensure_contrast(colors[0], background, 3.0)]
+    background_y = relative_luminance(background)
+    center_y = max(0.16, 3.0 * (background_y + 0.05) - 0.05 + 0.02) if dark else min(
+        0.28, (background_y + 0.05) / 3.0 - 0.05 - 0.02)
+    edge_y = 0.55 if dark else 0.055
+    count = len(colors)
+    positions = [abs(2 * i / (count - 1) - 1) for i in range(count)]
+    targets = [center_y + (edge_y - center_y) * pos for pos in positions]
+    for chroma_scale in (1.0, 0.85, 0.65, 0.45, 0.3):
+        selected = [_color_at_luminance(src, y, chroma_scale) for src, y in zip(colors, targets)]
+        values = [relative_luminance(c) for c in selected]
+        contrast_ok = all(contrast_ratio(color, background) >= 3.0 for color in selected)
+        ordered = True
+        for i in range(count - 1):
+            delta_strength = positions[i + 1] - positions[i]
+            delta_y = values[i + 1] - values[i]
+            if abs(delta_strength) < 1e-8:
+                if abs(delta_y) >= 0.005:
+                    ordered = False
+                    break
+            elif delta_strength * delta_y * (1 if dark else -1) <= 1e-6:
+                ordered = False
+                break
+        if contrast_ok and ordered:
+            return selected
+    raise ValueError("Cannot construct an accessible diverging palette preserving magnitude order")
 
 
 def _accessible_sequential(sources: tuple[str, ...], count: int, *, dark: bool, background: str) -> list[str]:
@@ -209,10 +296,14 @@ def get_palette(
     else:
         colors, fallback_diverging_hues = _diverging(sources, n_colors, dark=dark)
     original_display = list(colors)
-    if accessibility == "wcag-aa" and chart_type == "sequential":
-        colors = _accessible_sequential(sources, n_colors, dark=dark, background=background)
-    if accessibility == "wcag-aa" and chart_type != "sequential":
-        colors = [ensure_contrast(c, background, 3.0) for c in colors]
+    categorical_replacements = 0
+    if accessibility == "wcag-aa":
+        if chart_type == "sequential":
+            colors = _accessible_sequential(sources, n_colors, dark=dark, background=background)
+        elif chart_type == "diverging":
+            colors = _accessible_diverging(colors, dark=dark, background=background)
+        else:
+            colors, categorical_replacements = _accessible_categorical(colors, background)
     ratios = tuple(round(contrast_ratio(c, background), 3) for c in colors)
     adjusted = tuple(a != b for a, b in zip(original_display, colors))
     warnings: list[str] = []
@@ -220,6 +311,8 @@ def get_palette(
         warnings.append("Display colors adjusted toward >=3:1 contrast against the supplied background; source HEX values are unchanged.")
     if n_colors > len(_distinct(sources)) and chart_type == "categorical":
         warnings.append("Additional category colors are generated variations, not official team colors.")
+    if categorical_replacements:
+        warnings.append(f"Replaced {categorical_replacements} contrast-colliding category colors with distinct display variations; generated colors are not official team colors.")
     report = audit_palette(colors, background=background)
     warnings.extend(f"{issue.code}: {issue.message} ({', '.join(issue.colors)})" for issue in report.issues)
     if chart_type == "diverging":
