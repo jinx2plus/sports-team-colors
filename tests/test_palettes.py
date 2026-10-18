@@ -54,3 +54,64 @@ def test_oklch_roundtrip_approximate():
         l, c, h = to_oklch(color)
         reconstructed = from_oklch(l, c, h)
         assert all(abs(int(reconstructed[i:i + 2], 16) - int(color[i:i + 2], 16)) <= 2 for i in (1, 3, 5))
+
+
+@pytest.mark.parametrize("theme", ["light", "dark"])
+def test_accessible_sequential_is_monotonic_for_every_team(theme):
+    """Contrast correction must not invert magnitude bins or collapse swatches."""
+    from sports_colors.color_math import relative_luminance
+
+    direction = 1 if theme == "dark" else -1
+    for team in all_teams():
+        for count in (5, 10, 20):
+            p = get_palette(team["id"], chart_type="sequential", theme=theme,
+                            n_colors=count, accessibility="wcag-aa")
+            luminances = [relative_luminance(color) for color in p.colors]
+            assert all(contrast_ratio(color, p.background) >= 3.0 for color in p.colors), team["id"]
+            assert all((b-a) * direction > 1e-6 for a, b in zip(luminances, luminances[1:])), (team["id"], theme, p.colors)
+
+
+def test_accessible_sequential_reports_color_adjustments():
+    p = get_palette("mlb-diamondbacks", chart_type="sequential", theme="dark", n_colors=10)
+    assert any(p.adjusted)
+
+
+@pytest.mark.parametrize("team", ["nba-nets", "epl-fulham"])
+@pytest.mark.parametrize("theme", ["light", "dark"])
+@pytest.mark.parametrize("accessibility", ["none", "wcag-aa"])
+def test_neutral_team_diverging_has_distinct_opposing_hues(team, theme, accessibility):
+    from sports_colors.color_math import distance_oklab
+
+    p = get_palette(team, chart_type="diverging", n_colors=5,
+                    theme=theme, accessibility=accessibility)
+    assert distance_oklab(p.colors[0], p.colors[-1]) > 0.1
+    assert len(set(p.colors)) == 5
+    assert any("synthesized" in warning for warning in p.warnings)
+
+
+def test_installed_package_does_not_use_unrelated_site_packages_data(tmp_path, monkeypatch):
+    """An unrelated sibling /data must not shadow packaged sports_colors/data."""
+    import json
+    import sports_colors.palette as palette_module
+
+    site = tmp_path / "site-packages"
+    sibling = site / "data"
+    bundled = site / "sports_colors" / "data"
+    sibling.mkdir(parents=True)
+    bundled.mkdir(parents=True)
+    for league in ("mlb", "nba", "nfl", "epl"):
+        base = {"name": "Fixture", "num_id": 1, "logo_url": "https://example.com/image.png",
+                "colors": {"primary": "#000000", "secondary": "#FFFFFF",
+                           "tertiary": "#777777", "quaternary": "#EE9900"}}
+        bundled_team = dict(base, id=f"{league}-from-wheel")
+        wrong_team = dict(base, id=f"{league}-from-unrelated-data")
+        (bundled / f"{league}.json").write_text(json.dumps([bundled_team]), encoding="utf-8")
+        (sibling / f"{league}.json").write_text(json.dumps([wrong_team]), encoding="utf-8")
+    palette_module.all_teams.cache_clear()
+    try:
+        with monkeypatch.context() as m:
+            m.setattr(palette_module, "__file__", str(site / "sports_colors" / "palette.py"))
+            found = palette_module.all_teams()
+            assert {x["id"] for x in found} == {f"{league}-from-wheel" for league in ("mlb", "nba", "nfl", "epl")}
+    finally:
+        palette_module.all_teams.cache_clear()

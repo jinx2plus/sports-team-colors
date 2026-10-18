@@ -15,6 +15,7 @@ from .color_math import (
     ensure_contrast,
     from_oklch,
     normalize_hex,
+    relative_luminance,
     to_oklch,
 )
 
@@ -40,9 +41,14 @@ class Palette:
 @lru_cache(maxsize=1)
 def all_teams() -> tuple[dict, ...]:
     """The root /data is authoritative in a checkout; bundled data works in a wheel."""
-    project_data = Path(__file__).resolve().parent.parent / "data"
+    root = Path(__file__).resolve().parent.parent
+    project_data = root / "data"
     bundled_data = Path(__file__).resolve().parent / "data"
-    data_dir = project_data if project_data.is_dir() else bundled_data
+    # The directory adjacent to a wheel's site-packages may contain unrelated
+    # data/. Only prefer the checkout when its project files AND catalog exist.
+    is_checkout = (root / "pyproject.toml").is_file() and (root / "setup.py").is_file()
+    is_complete = all((project_data / f"{league}.json").is_file() for league in _LEAGUES)
+    data_dir = project_data if is_checkout and is_complete else bundled_data
     teams: list[dict] = []
     for league in _LEAGUES:
         with (data_dir / f"{league}.json").open(encoding="utf-8") as fh:
@@ -103,13 +109,61 @@ def _sequential(sources: tuple[str, ...], count: int, *, dark: bool) -> list[str
     return [from_oklch(start + (end - start) * i / (count - 1), chroma, hue) for i in range(count)]
 
 
-def _diverging(sources: tuple[str, ...], count: int, *, dark: bool) -> list[str]:
+def _accessible_sequential(sources: tuple[str, ...], count: int, *, dark: bool, background: str) -> list[str]:
+    """Constrain the *whole* ordered ramp, not individual swatches.
+
+    Per-swatch contrast fixes can pull the first two bins past one another.
+    Shift the OKLCH lightness domain together until all swatches meet contrast
+    while their measured sRGB relative luminance is strictly monotonic.
+    """
     if count == 1:
-        return ["#999999"]
-    # Preserve two team hues where available. A neutral middle denotes zero.
-    _, c1, h1 = to_oklch(sources[0])
-    second = sources[1] if len(sources) > 1 else sources[0]
-    _, c2, h2 = to_oklch(second)
+        return [ensure_contrast(sources[0], background, 3.0)]
+    _, chroma, hue = to_oklch(sources[0])
+    initial_start, initial_end = ((0.48, 0.88) if dark else (0.64, 0.25))
+    direction = 1 if dark else -1
+    for chroma_scale in (1.0, 0.85, 0.65, 0.4, 0.2, 0.0):
+        for step in range(95):
+            shift = direction * step / 200
+            start = initial_start + shift
+            end = max(0.02, min(0.98, initial_end + shift))
+            if not 0.02 <= start <= 0.98 or (end - start) * direction < 0.12:
+                break
+            colors = [from_oklch(start + (end - start) * i / (count - 1),
+                                  chroma * chroma_scale, hue) for i in range(count)]
+            values = [relative_luminance(c) for c in colors]
+            if (all(contrast_ratio(c, background) >= 3.0 for c in colors)
+                    and all((values[i+1] - values[i]) * direction > 1e-6
+                            for i in range(count - 1))):
+                return colors
+    raise ValueError("Cannot construct a monotonic, >=3:1 sequential palette for this team")
+
+
+def _diverging(sources: tuple[str, ...], count: int, *, dark: bool) -> tuple[list[str], bool]:
+    """Distinct opposing hues are essential to encode signed values.
+
+    Prefer substantially different chromatic team colors; otherwise synthesize
+    a complementary hue, or use a blue/orange pair for entirely neutral teams.
+    The returned boolean notes that non-brand fallback hues were necessary.
+    """
+    if count == 1:
+        return ["#999999"], False
+    chromatic = [(c, h) for source in sources for _, c, h in [to_oklch(source)] if c >= 0.04]
+    fallback = False
+    if not chromatic:
+        _, c1, h1 = to_oklch("#4477AA")
+        _, c2, h2 = to_oklch("#CC6633")
+        fallback = True
+    else:
+        c1, h1 = chromatic[0]
+        alternatives = sorted(chromatic[1:],
+                              key=lambda item: abs(math.atan2(math.sin(item[1] - h1),
+                                                             math.cos(item[1] - h1))), reverse=True)
+        if alternatives and abs(math.atan2(math.sin(alternatives[0][1] - h1),
+                                           math.cos(alternatives[0][1] - h1))) >= math.pi / 3:
+            c2, h2 = alternatives[0]
+        else:
+            c2, h2 = max(0.12, c1), h1 + math.pi
+            fallback = True
     end_l, center_l = ((0.76, 0.42) if dark else (0.39, 0.72))
     result: list[str] = []
     for i in range(count):
@@ -117,7 +171,7 @@ def _diverging(sources: tuple[str, ...], count: int, *, dark: bool) -> list[str]
         strength = abs(pos)
         hue, chroma = (h1, c1) if pos < 0 else (h2, c2)
         result.append(from_oklch(center_l + (end_l - center_l) * strength, chroma * strength, hue))
-    return result
+    return result, fallback
 
 
 def get_palette(
@@ -147,14 +201,17 @@ def get_palette(
     sources = tuple(get_team_colors(team)[role] for role in _ROLES)
     dark = theme == "dark"
     background = "#101820" if dark else "#FFFFFF"
+    fallback_diverging_hues = False
     if chart_type == "categorical":
         colors = _categorical(sources, n_colors)
     elif chart_type == "sequential":
         colors = _sequential(sources, n_colors, dark=dark)
     else:
-        colors = _diverging(sources, n_colors, dark=dark)
+        colors, fallback_diverging_hues = _diverging(sources, n_colors, dark=dark)
     original_display = list(colors)
-    if accessibility == "wcag-aa":
+    if accessibility == "wcag-aa" and chart_type == "sequential":
+        colors = _accessible_sequential(sources, n_colors, dark=dark, background=background)
+    if accessibility == "wcag-aa" and chart_type != "sequential":
         colors = [ensure_contrast(c, background, 3.0) for c in colors]
     ratios = tuple(round(contrast_ratio(c, background), 3) for c in colors)
     adjusted = tuple(a != b for a, b in zip(original_display, colors))
@@ -167,6 +224,8 @@ def get_palette(
     warnings.extend(f"{issue.code}: {issue.message} ({', '.join(issue.colors)})" for issue in report.issues)
     if chart_type == "diverging":
         warnings.append("Diverging palettes are for signed deviations around a meaningful zero; verify color-to-semantics mapping.")
+        if fallback_diverging_hues:
+            warnings.append("Insufficient distinguishable team hues: synthesized diverging colors are not official team colors.")
     if not preserve_brand:
         warnings.append("preserve_brand=False is deprecated as a no-op; source colors are always retained for provenance.")
     return Palette(entry["id"], entry["name"], chart_type, theme, tuple(colors), sources, background,

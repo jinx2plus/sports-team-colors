@@ -27,8 +27,8 @@ print(audit_palette(palette.colors, background=palette.background).passed)
 Supported chart types:
 
 - `categorical`: discrete series; team colors first, then generated derivatives if needed.
-- `sequential`: one hue with ordered OKLCH lightness; ordered magnitude only.
-- `diverging`: two hues with neutral midpoint; **only** for signed values with a meaningful reference point.
+- `sequential`: one hue with ordered OKLCH lightness; ordered magnitude only. With `wcag-aa`, adjust the **entire** lightness ramp to keep relative luminance strictly monotonic while meeting contrast; never adjust magnitude bins independently.
+- `diverging`: two distinguishable hues with neutral midpoint; **only** for signed values with a meaningful reference point. If the team palette is achromatic or lacks two distinct chromatic hues, generated fallback hues are used and marked as **non-official** in warnings.
 
 Chart rendering snippets are in `examples/matplotlib_demo.py` and `examples/plotly_demo.py`; those plotting libraries are optional. `matplotlib_rc` returns an `rc_context` dictionary, and `plotly_layout` returns a figure layout dictionary.
 
